@@ -1,0 +1,153 @@
+import numpy as np
+#Importamos La matriz que seria los pisos con el tipo de Departamentos 
+matriz_pisos = np.array([
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+])
+
+  
+
+acumulador = 0 
+cantidad = 0 
+total = 0
+
+matriz_ganancias = [
+     {"TIPO DEPARTAMENTO A": 1, "Cantidad":  "Total"},
+     {"TIPO DEPARTAMENTO B": 2, "Cantidad":  "Total"},
+     {"TIPO DEPARTAMENTO C": 3, "Cantidad":  "Total"},
+     {"TIPO DEPARTAMENTO D": 4, "Cantidad":  "Total"},              
+]                          
+
+pisos_disponibles = [
+    {"numero": 1, "Depatarmento A1": "", "Precio": "3.800 UF"},
+    {"numero": 1, "Depatarmento B1": "", "Precio": "3.000 UF"},
+    {"numero": 1, "Depatarmento C1": "", "Precio": "2.800 UF"},
+    {"numero": 1, "Depatarmento D1": "", "Precio": "3.500 UF"},
+    {"numero": 2, "Depatarmento A2": "", "Precio": "3.800 UF"},
+    {"numero": 2, "Depatarmento B2": "", "Precio": "3.000 UF"},
+    {"numero": 2, "Depatarmento C2": "", "Precio": "2.800 UF"},
+    {"numero": 2, "Depatarmento D2": "", "Precio": "3.500 UF"},
+    {"numero": 3, "Depatarmento A3": "", "Precio": "3.800 UF"},
+    {"numero": 3, "Depatarmento B3": "", "Precio": "3.000 UF"},
+    {"numero": 3, "Depatarmento C3": "", "Precio": "2.800 UF"},
+    {"numero": 3, "Depatarmento D3": "", "Precio": "3.500 UF"},
+    {"numero": 4, "Depatarmento A4": "", "Precio": "3.800 UF"},
+    {"numero": 4, "Depatarmento B4": "", "Precio": "3.000 UF"},
+    {"numero": 4, "Depatarmento C4": "", "Precio": "2.800 UF"},
+    {"numero": 4, "Depatarmento D4": "", "Precio": "3.500 UF"},
+    {"numero": 5, "Depatarmento A5": "", "Precio": "3.800 UF"},
+    {"numero": 5, "Depatarmento B5": "", "Precio": "3.000 UF"},
+    {"numero": 5, "Depatarmento C5": "", "Precio": "2.800 UF"},
+    {"numero": 5, "Depatarmento D5": "", "Precio": "3.500 UF"},
+    {"numero": 6, "Depatarmento A6": "", "Precio": "3.800 UF"},
+    {"numero": 6, "Depatarmento B6": "", "Precio": "3.000 UF"},
+    {"numero": 6, "Depatarmento C6": "", "Precio": "2.800 UF"},
+    {"numero": 6, "Depatarmento D6": "", "Precio": "3.500 UF"},
+    {"numero": 7, "Depatarmento A7": "", "Precio": "3.800 UF"},
+    {"numero": 7, "Depatarmento B7": "", "Precio": "3.000 UF"},
+    {"numero": 7, "Depatarmento C7": "", "Precio": "2.800 UF"},
+    {"numero": 7, "Depatarmento D7": "", "Precio": "3.500 UF"},
+    {"numero": 8, "Depatarmento A8": "", "Precio": "3.800 UF"},
+    {"numero": 8, "Depatarmento B8": "", "Precio": "3.000 UF"},
+    {"numero": 8, "Depatarmento C8": "", "Precio": "2.800 UF"},
+    {"numero": 8, "Depatarmento D8": "", "Precio": "3.500 UF"},
+    {"numero": 9, "Depatarmento A9": "", "Precio": "3.800 UF"},
+    {"numero": 9, "Depatarmento B9": "", "Precio": "3.000 UF"},
+    {"numero": 9, "Depatarmento C9": "", "Precio": "2.800 UF"},
+    {"numero": 9, "Depatarmento D9": "", "Precio": "3.500 UF"},
+    {"numero":10, "Depatarmento A10": "", "Precio": "3.800 UF"},
+    {"numero":10, "Depatarmento B10": "", "Precio": "3.000 UF"},
+    {"numero":10, "Depatarmento C10": "", "Precio": "2.800 UF"},
+    {"numero":10, "Depatarmento D10": "", "Precio": "3.500 UF"},
+]
+
+clientes = []
+
+def mostrar_departamentos():
+    print("DEPARTAMENTOS DISPONIBLES:")
+    for tipo in matriz_pisos:
+        for piso in tipo:
+            if piso == 0:
+                print("[ ]", end=" ")
+            else:
+                print("[X]", end=" ")
+        print()
+
+def comprar_piso():
+    piso = int(input("INGRESE EL TIPO DE DEPARTAMENTO  A = 1  B = 2  C = 3  D = 4:   "))
+    tipo = int(input("INGRESE EL NUMERO DEL PISO DEL 1 - 10 : "))
+
+    if matriz_pisos[tipo-1][piso-1] == 0:
+        run = input("INGRESE SU RUN: ")
+
+        cliente = {
+            "run": run,
+            "piso": (tipo, piso)
+        }
+
+        clientes.append(cliente)
+        matriz_pisos[tipo-1][piso-1] = 1
+        print("Has Seleccionado el Departamento Con Exito.")
+    else:
+        print("-------------------- ERROR --------------------")
+        print("El Departamento Seleccionado No está disponible. Elija Otro Porfavor!.")
+
+ 
+
+
+def mostrar_ganancias():
+    for cliente in clientes:
+        piso = cliente["piso"]
+        if matriz_pisos[piso[0]-1][piso[1]-1] == 1:
+            for l in pisos_disponibles:
+                if l["numero"] == piso[1]:
+                    print("DETALLES DE LAS GANANCIAS:")
+                    print(f"DEPARTAMENTOS VENDIDOS: {l['numero']}")
+                    print(f"DINERO RECAUDADO: ")
+                    break
+
+def ver_listadoclientes():
+    print("Lista de clientes que han comprado un Departamento:")
+    for cliente in clientes:
+        print(f"RUN: {cliente['run']}")
+        piso = cliente["piso"]
+        print(f"Departamento Seleccionado: ({piso[0]}, {piso[1]})")
+        print()
+
+def menu():
+    print("Bienvenido A La Inmobiliaria 'Casa Feliz', Eliga Una Opcion Porfavor")
+    while True:
+        print("--------- MENÚ CASA FELIZ ---------")
+        print("1. Comprar departamento")
+        print("2. Mostrar departamentos disponibles")
+        print("3. Ver listado de compradores")
+        print("4. Mostrar ganancias totales ")
+        print("5. Salir")
+
+        opcion = input("Seleccione una Opción: ")
+
+        if opcion == "1":
+            comprar_piso()
+        elif opcion == "2":
+            mostrar_departamentos()
+        elif opcion == "3":
+            ver_listadoclientes()          
+        elif opcion == "4":
+            mostrar_ganancias() 
+        elif opcion == "5":
+            print("Muchas Gracias Por Utilizar La Aplicacion 'Casa Feliz'.")
+            print("----- Julian Meneses -----")
+            print("----- 10-07-2023 -----")
+            break
+        else:
+            print("Opción inválida. Por favor, seleccione una opción válida.")
+
+menu()
